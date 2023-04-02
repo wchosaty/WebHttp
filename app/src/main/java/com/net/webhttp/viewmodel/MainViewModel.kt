@@ -25,8 +25,7 @@ class MainViewModel: ViewModel() {
         j.addProperty("a", numberA.value.toString().trim())
         j.addProperty("b", numberB.value.toString().trim())
         Log.d(TAG,"toWebCaculator :" + j.toString())
-        CoroutineScope(Dispatchers.IO).launch {
-//            load(j.toString())
+        viewModelScope.launch(Dispatchers.IO) {
             (URL(servletURL).openConnection() as HttpURLConnection).run {
                 doInput = true
                 doOutput = true
